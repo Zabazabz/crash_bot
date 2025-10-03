@@ -1,14 +1,9 @@
-import asyncio
 import os
-from aiogram import Bot, Dispatcher, types
-# 🔑 Теперь токен берётся из переменной окружения
+import telebot
 TOKEN = os.getenv("TOKEN")
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
-@dp.message()
-async def echo_handler(message: types.Message):
-    await message.answer(f"Ты написал: {message.text}")
-async def main():
-    await dp.start_polling(bot)
+bot = telebot.TeleBot(TOKEN)
+@bot.message_handler(func=lambda m: True)
+def echo(m):
+    bot.reply_to(m, f"Ты написал: {m.text}")
 if __name__ == "__main__":
-    asyncio.run(main())
+    bot.infinity_polling()
