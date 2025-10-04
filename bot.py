@@ -412,7 +412,7 @@ def run_crash_loop(chat_id, message_id, crash_point):
     # очистка ставок
     clear_bets(chat_id)
 # ========== Запуск ==========
-if name == "main":
+if __name__ == "__main__":
     init_db()
     print("Bot started...")
     bot.infinity_polling()
